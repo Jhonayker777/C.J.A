@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - C.J.A Estampados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #3498db;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 5px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+            background-color: #f8f9fa;
+        }
+
+        /* Hero */
+        .catalog-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-bottom: 50px;
+        }
+
+        .catalog-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        /* Controles */
+        .catalog-controls {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .filters {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Grid de Productos */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-category {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .product-description {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .product-features li {
+            padding: 5px 0;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .product-features li i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+
+        .request-design {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .request-design:hover {
+            background-color: #128C7E;
+        }
+
+        /* Estados */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--gray);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 20px;
+            color: #27ae60;
+            background: #d5f4e6;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 20px;
+            color: #c0392b;
+            background: #ffeaea;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links ul li i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">C.<span>J</span>.A</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="catalogo.html" class="active">Catálogo</a></li>
+                        <li><a href="personalizados.html">Personalizados</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="catalog-hero">
+        <div class="container">
+            <h1>Catálogo de Estampados</h1>
+            <p>Descubre nuestra amplia variedad de diseños</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="catalog-controls">
+            <div class="search-box">
+                <input type="text" placeholder="Buscar diseños..." id="searchInput">
+                <button onclick="filterProducts()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="category">Categoría</label>
+                    <select id="category" onchange="filterProducts()">
+                        <option value="all">Todas las categorías</option>
+                        <option value="corporativo">Corporativo</option>
+                        <option value="creativo">Creativo</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="deportivo">Deportivo</option>
+                        <option value="vintage">Vintage</option>
+                        <option value="minimalista">Minimalista</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price">Precio</label>
+                    <select id="price" onchange="filterProducts()">
+                        <option value="all">Todos los precios</option>
+                        <option value="0-50000">Hasta $50.000</option>
+                        <option value="50000-100000">$50.000 - $100.000</option>
+                        <option value="100000+">Más de $100.000</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="style">Estilo</label>
+                    <select id="style" onchange="filterProducts()">
+                        <option value="all">Todos los estilos</option>
+                        <option value="moderno">Moderno</option>
+                        <option value="colorido">Colorido</option>
+                        <option value="vintage">Vintage</option>
+                        <option value="minimalista">Minimalista</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Cargando catálogo desde la base de datos...</p>
+        </div>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <i class="fas fa-check-circle"></i> Catálogo cargado correctamente desde Google Sheets
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i> <span id="errorText">Error al cargar el catálogo</span>
+            <br>
+            <button onclick="loadBackupProducts()" style="margin-top: 15px; padding: 10px 20px; background: var(--primary); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Usar Datos de Ejemplo
+            </button>
+            <br>
+            <button onclick="loadProducts()" style="margin-top: 10px; padding: 8px 15px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Reintentar Conexión
+            </button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+            <!-- Los productos aparecerán aquí -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">C.<span>J</span>.A</div>
+                    <p>Especialistas en estampado textil de alta calidad</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/cja.estampados" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/573001234567" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fab fa-whatsapp"></i> +57 300 123 4567</li>
+                        <li><i class="fab fa-instagram"></i> @cja.estampados</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 C.J.A Estampados. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ✅ URL CORRECTA de tu Google Sheets
+        const GOOGLE_SHEETS_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT_fBmunH10mioqw2egb2IOjhL5BC-0ZVq3kWjeP8LYDpGMO-spcB0oxdZsG2OGUtveQrLGe7W6V_Gh/pub?output=csv';
+        
+        // 🔽 REEMPLAZA CON TU NÚMERO DE WHATSAPP
+        const WHATSAPP_NUMBER = '573001234567';
+
+        let allProducts = [];
+
+        // Mostrar loading
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('catalogGrid').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        // Ocultar loading
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('catalogGrid').style.display = 'grid';
+        }
+
+        // Mostrar éxito
+        function showSuccess() {
+            document.getElementById('successMessage').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+        }
+
+        // Mostrar error
+        function showError(message) {
+            document.getElementById('errorText').textContent = message;
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Cargar productos desde Google Sheets
+        async function loadProducts() {
+            try {
+                showLoading();
+                console.log('🔗 Conectando con tu Google Sheets...');
+                
+                // Intentar sin proxy primero
+                const response = await fetch(GOOGLE_SHEETS_URL);
+                
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+                }
+                
+                const csvText = await response.text();
+                console.log('📄 CSV recibido:', csvText);
+                
+                if (!csvText || csvText.trim().length === 0) {
+                    throw new Error('La base de datos está vacía');
+                }
+                
+                // Verificar si es un HTML (error de Google)
+                if (csvText.includes('<!DOCTYPE') || csvText.includes('<html')) {
+                    throw new Error('Google está mostrando una página de error en lugar del CSV');
+                }
+                
+                allProducts = parseCSV(csvText);
+                console.log('✅ Productos procesados:', allProducts);
+                
+                if (allProducts.length === 0) {
+                    throw new Error('No se encontraron productos válidos en la base de datos');
+                }
+                
+                hideLoading();
+                showSuccess();
+                displayProducts(allProducts);
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showError('Error: ' + error.message);
+            }
+        }
+
+        // Función mejorada para parsear CSV
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n').filter(line => line.trim() !== '');
+            
+            if (lines.length < 2) {
+                console.warn('CSV tiene muy pocas líneas');
+                return [];
+            }
+            
+            const headers = lines[0].split(',').map(header => header.trim().toLowerCase());
+            console.log('📋 Headers encontrados:', headers);
+            
+            const products = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i];
+                if (!line.trim()) continue;
+                
+                try {
+                    // Manejo robusto de CSV
+                    const values = [];
+                    let current = '';
+                    let inQuotes = false;
+                    
+                    for (let char of line) {
+                        if (char === '"') {
+                            inQuotes = !inQuotes;
+                        } else if (char === ',' && !inQuotes) {
+                            values.push(current.trim());
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    values.push(current.trim());
+                    
+                    const product = {};
+                    
+                    headers.forEach((header, index) => {
+                        let value = values[index] || '';
+                        
+                        // Limpiar comillas si existen
+                        value = value.replace(/^"|"$/g, '');
+                        
+                        switch(header) {
+                            case 'id':
+                                value = parseInt(value) || (i);
+                                break;
+                            case 'price':
+                                value = parseFloat(value) || 0;
+                                break;
+                            case 'available':
+                                value = value.toLowerCase() === 'true' || value === '1' || value === 'TRUE';
+                                break;
+                        }
+                        
+                        product[header] = value;
+                    });
+                    
+                    // Solo agregar productos disponibles con título
+                    if (product.available !== false && product.title && product.title.trim() !== '') {
+                        products.push(product);
+                    }
+                    
+                } catch (error) {
+                    console.warn(`Error en línea ${i}:`, error);
+                }
+            }
+            
+            console.log(`📊 ${products.length} productos válidos encontrados`);
+            return products;
+        }
+
+        // Mostrar productos
+        function displayProducts(products = allProducts) {
+            const catalogGrid = document.getElementById('catalogGrid');
+            
+            if (!products || products.length === 0) {
+                catalogGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--gray);">
+                        <i class="fas fa-search" style="font-size: 48px; margin-bottom: 20px; color: var(--primary);"></i>
+                        <h3>No se encontraron productos</h3>
+                        <p>Intenta con otros filtros o términos de búsqueda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            catalogGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.title}" class="product-image"
+                         onerror="this.src='https://via.placeholder.com/500x500/ecf0f1/2c3e50?text=Imagen+No+Disponible'">
+                    <div class="product-info">
+                        <div class="product-category">${product.category || 'General'}</div>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-description">${product.description || 'Producto de calidad premium.'}</p>
+                        <div class="product-price">$${(product.price || 0).toLocaleString('es-CO')} COP</div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Tela: ${product.fabric || 'Algodón Premium'}</li>
+                            <li><i class="fas fa-check"></i> Técnica: ${product.technique || 'Serigrafía'}</li>
+                            <li><i class="fas fa-check"></i> Estilo: ${product.style || 'Moderno'}</li>
+                        </ul>
+                        <button class="request-design" onclick="sendWhatsAppRequest(${product.id})">
+                            <i class="fab fa-whatsapp"></i> Solicitar Cotización
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filtrar productos
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('category').value;
+            const priceFilter = document.getElementById('price').value;
+            const styleFilter = document.getElementById('style').value;
+            
+            let filtered = allProducts.filter(product => {
+                const matchesSearch = product.title.toLowerCase().includes(searchTerm) || 
+                                    (product.description && product.description.toLowerCase().includes(searchTerm));
+                const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
+                const matchesStyle = styleFilter === 'all' || product.style === styleFilter;
+                
+                let matchesPrice = true;
+                if (priceFilter !== 'all') {
+                    const [min, max] = priceFilter.split('-');
+                    if (max === '+') {
+                        matchesPrice = product.price >= parseInt(min);
+                    } else {
+                        matchesPrice = product.price >= parseInt(min) && product.price <= parseInt(max);
+                    }
+                }
+                
+                return matchesSearch && matchesCategory && matchesPrice && matchesStyle;
+            });
+            
+            displayProducts(filtered);
+        }
+
+        // Enviar solicitud por WhatsApp
+        function sendWhatsAppRequest(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (!product) {
+                alert('Producto no encontrado');
+                return;
+            }
+            
+            const message = `¡Hola C.J.A! Estoy interesado en:%0A%0A*${product.title}*%0A%0A• Precio: $${product.price.toLocaleString('es-CO')} COP%0A• Categoría: ${product.category}%0A• Técnica: ${product.technique}%0A• Tela: ${product.fabric}%0A%0A¿Podrían darme más información?`;
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Cargar datos de respaldo
+        function loadBackupProducts() {
+            console.log('🔄 Cargando datos de respaldo...');
+            
+            allProducts = [
+                {
+                    id: 1,
+                    title: "Camisa Ejecutiva con Logo",
+                    category: "corporativo",
+                    price: 89900,
+                    image: "https://images.unsplash.com/photo-1520006403909-838d6b92c22e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                    description: "Perfecta para uniformes corporativos. Estampado profesional de logos empresariales.",
+                    fabric: "Algodón Premium",
+                    technique: "Serigrafía",
+                    style: "moderno"
+                },
+                {
+                    id: 2,
+                    title: "Diseño Artístico Completo",
+                    category: "creativo",
+                    price: 75900,
+                    image: "https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                    description: "Estampado full print con diseños artísticos y creativos para expresión personal.",
+                    fabric: "Jersey",
+                    technique: "Transfer Digital",
+                    style: "colorido"
+                },
+                {
+                    id: 3,
+                    title: "Camisa para Eventos",
+                    category: "eventos",
+                    price: 69900,
+                    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+                    description: "Ideal para eventos empresariales, fiestas y reuniones. Diseños personalizados.",
+                    fabric: "Poliéster",
+                    technique: "Vinilo Textil",
+                    style: "colorido"
+                }
+            ];
+            
+            document.getElementById('errorMessage').style.display = 'none';
+            hideLoading();
+            displayProducts(allProducts);
+            
+            console.log('✅ Datos de respaldo cargados');
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Iniciando catálogo con tu base de datos...');
+            loadProducts();
+            
+            // Buscar en tiempo real
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                filterProducts();
+            });
+        });
+
+        // Para debugging
+        window.debugProducts = () => {
+            console.log('📊 Productos:', allProducts);
+            console.log('🔗 URL:', GOOGLE_SHEETS_URL);
+        };
+    </script>
+</body>
+</html>

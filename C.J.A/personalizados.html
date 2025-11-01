@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalizados - C.J.A Estampados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #3498db;
+            --light: #f9f9f9;
+            --dark: #333;
+            --gray: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--secondary);
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary);
+            background-color: #f8f9fa;
+        }
+
+        /* Hero Personalizados */
+        .personalizados-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-bottom: 50px;
+        }
+
+        .personalizados-hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Proceso de Personalización */
+        .custom-process {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--secondary);
+            font-size: 36px;
+            font-weight: 700;
+        }
+
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .steps-container::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+            transition: all 0.3s;
+        }
+
+        .step.active .step-number {
+            background-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: var(--gray);
+        }
+
+        .step-content {
+            display: none;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .file-upload {
+            border: 2px dashed var(--primary);
+            border-radius: 5px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-upload:hover {
+            background-color: #f0f8ff;
+        }
+
+        .file-upload i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .color-option.selected {
+            border-color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .size-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .size-option.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-secondary {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .preview-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed var(--primary);
+            border-radius: 10px;
+            background: white;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links ul li i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .footer-links ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            background-color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #c0392b;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: white;
+                transition: left 0.3s;
+                box-shadow: var(--shadow);
+                z-index: 999;
+            }
+            
+            nav.active {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            
+            .personalizados-hero {
+                padding: 60px 0;
+            }
+            
+            .personalizados-hero h1 {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .steps-container::before {
+                display: none;
+            }
+            
+            .step {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                margin-bottom: 20px;
+            }
+            
+            .step-number {
+                margin: 0 15px 0 0;
+                flex-shrink: 0;
+            }
+            
+            .step-content {
+                padding: 20px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .personalizados-hero h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 auto 15px;
+            }
+            
+            .color-options, .size-options {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">C.<span>J</span>.A</div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="personalizados.html" class="active">Personalizados</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Personalizados -->
+    <section class="personalizados-hero">
+        <div class="container">
+            <h1>Camisas Personalizadas</h1>
+            <p>Crea tu diseño único en 4 simples pasos</p>
+        </div>
+    </section>
+
+    <!-- Proceso de Personalización -->
+    <section class="custom-process">
+        <div class="container">
+            <h2 class="section-title">Personaliza tu Camisa</h2>
+            
+            <div class="steps-container">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Diseño</div>
+                    <div class="step-description">Sube tu diseño</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Color</div>
+                    <div class="step-description">Elige el color</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Talla</div>
+                    <div class="step-description">Selecciona talla</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Revisión</div>
+                    <div class="step-description">Confirma tu pedido</div>
+                </div>
+            </div>
+
+            <!-- Paso 1: Diseño -->
+            <div class="step-content active" id="step-1">
+                <h3>Sube tu diseño personalizado</h3>
+                <p>Puedes subir una imagen, logo o diseño que quieras estampar en tu camisa.</p>
+                
+                <div class="form-group">
+                    <label for="design-upload">Subir archivo</label>
+                    <div class="file-upload" id="design-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Haz clic para subir tu diseño</p>
+                        <p class="file-name" id="file-name">No se ha seleccionado ningún archivo</p>
+                    </div>
+                    <input type="file" id="design-file" accept="image/*" style="display: none;">
+                </div>
+                
+                <div class="form-group">
+                    <label for="design-description">Descripción del diseño</label>
+                    <textarea id="design-description" class="form-control" rows="4" placeholder="Describe tu diseño, colores, ubicación en la camisa, etc."></textarea>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" disabled>Anterior</button>
+                    <button class="btn btn-primary" id="next-to-step-2">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Color -->
+            <div class="step-content" id="step-2">
+                <h3>Selecciona el color de tu camisa</h3>
+                <p>Elige el color base para tu camisa personalizada.</p>
+                
+                <div class="form-group">
+                    <label>Color de la camisa</label>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="blanco"></div>
+                        <div class="color-option" style="background-color: #000000;" data-color="negro"></div>
+                        <div class="color-option" style="background-color: #2c3e50;" data-color="azul oscuro"></div>
+                        <div class="color-option" style="background-color: #3498db;" data-color="azul"></div>
+                        <div class="color-option" style="background-color: #e74c3c;" data-color="rojo"></div>
+                        <div class="color-option" style="background-color: #2ecc71;" data-color="verde"></div>
+                        <div class="color-option" style="background-color: #f1c40f;" data-color="amarillo"></div>
+                        <div class="color-option" style="background-color: #9b59b6;" data-color="morado"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="back-to-step-1">Anterior</button>
+                    <button class="btn btn-primary" id="next-to-step-3">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Talla -->
+            <div class="step-content" id="step-3">
+                <h3>Selecciona la talla de tu camisa</h3>
+                <p>Elige la talla que mejor se adapte a ti.</p>
+                
+                <div class="form-group">
+                    <label>Talla de la camisa</label>
+                    <div class="size-options">
+                        <div class="size-option" data-size="XS">XS</div>
+                        <div class="size-option" data-size="S">S</div>
+                        <div class="size-option selected" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="custom-notes">Notas adicionales</label>
+                    <textarea id="custom-notes" class="form-control" rows="3" placeholder="Especificaciones especiales, ajustes, etc."></textarea>
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="back-to-step-2">Anterior</button>
+                    <button class="btn btn-primary" id="next-to-step-4">Siguiente</button>
+                </div>
+            </div>
+
+            <!-- Paso 4: Revisión -->
+            <div class="step-content" id="step-4">
+                <h3>Revisa y confirma tu pedido</h3>
+                <p>Verifica que toda la información sea correcta antes de finalizar tu pedido.</p>
+                
+                <div class="preview-container">
+                    <h4>Resumen de tu camisa personalizada</h4>
+                    <div id="preview-details">
+                        <!-- Los detalles del pedido se mostrarán aquí -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-name">Nombre completo</label>
+                    <input type="text" id="customer-name" class="form-control" placeholder="Ingresa tu nombre completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customer-phone">Teléfono</label>
+                    <input type="tel" id="customer-phone" class="form-control" placeholder="Ingresa tu número de teléfono">
+                </div>
+                
+                <div class="navigation-buttons">
+                    <button class="btn btn-secondary" id="back-to-step-3">Anterior</button>
+                    <button class="btn btn-primary" id="submit-custom-order">
+                        <i class="fab fa-whatsapp"></i> Solicitar por WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">C.<span>J</span>.A</div>
+                    <p>Especialistas en estampado textil de alta calidad para empresas y personas.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/cja.estampados" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/573001234567" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="personalizados.html">Personalizados</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fab fa-whatsapp"></i> +57 300 123 4567</li>
+                        <li><i class="fab fa-instagram"></i> @cja.estampados</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 C.J.A Estampados. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Variables para el proceso de personalización
+        let currentStep = 1;
+        let customOrder = {
+            designFile: null,
+            designDescription: '',
+            color: 'blanco',
+            size: 'M',
+            notes: '',
+            customerName: '',
+            customerPhone: ''
+        };
+
+        const WHATSAPP_NUMBER = '573001234567'; // Reemplaza con tu número
+
+        // Menú móvil
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+
+        // Función para cambiar de paso
+        function goToStep(step) {
+            // Ocultar todos los pasos
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Mostrar el paso actual
+            document.getElementById(`step-${step}`).classList.add('active');
+            
+            // Actualizar indicadores de pasos
+            document.querySelectorAll('.step').forEach(stepElement => {
+                stepElement.classList.remove('active');
+            });
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            currentStep = step;
+            
+            // Actualizar vista previa en el paso 4
+            if (step === 4) {
+                updatePreview();
+            }
+        }
+
+        // Función para actualizar la vista previa
+        function updatePreview() {
+            const previewDetails = document.getElementById('preview-details');
+            previewDetails.innerHTML = `
+                <p><strong>Diseño:</strong> ${customOrder.designFile ? customOrder.designFile.name : 'No subido'}</p>
+                <p><strong>Descripción:</strong> ${customOrder.designDescription || 'No proporcionada'}</p>
+                <p><strong>Color:</strong> ${customOrder.color}</p>
+                <p><strong>Talla:</strong> ${customOrder.size}</p>
+                <p><strong>Notas:</strong> ${customOrder.notes || 'Ninguna'}</p>
+            `;
+        }
+
+        // Configurar proceso de personalización
+        document.getElementById('design-upload').addEventListener('click', () => {
+            document.getElementById('design-file').click();
+        });
+        
+        document.getElementById('design-file').addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const fileName = e.target.files[0].name;
+                document.getElementById('file-name').textContent = fileName;
+                customOrder.designFile = e.target.files[0];
+            }
+        });
+        
+        document.getElementById('design-description').addEventListener('input', (e) => {
+            customOrder.designDescription = e.target.value;
+        });
+        
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.color-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+                customOrder.color = option.getAttribute('data-color');
+            });
+        });
+        
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.size-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                option.classList.add('selected');
+                customOrder.size = option.getAttribute('data-size');
+            });
+        });
+        
+        document.getElementById('custom-notes').addEventListener('input', (e) => {
+            customOrder.notes = e.target.value;
+        });
+        
+        document.getElementById('customer-name').addEventListener('input', (e) => {
+            customOrder.customerName = e.target.value;
+        });
+        
+        document.getElementById('customer-phone').addEventListener('input', (e) => {
+            customOrder.customerPhone = e.target.value;
+        });
+        
+        // Navegación entre pasos
+        document.getElementById('next-to-step-2').addEventListener('click', () => goToStep(2));
+        document.getElementById('back-to-step-1').addEventListener('click', () => goToStep(1));
+        document.getElementById('next-to-step-3').addEventListener('click', () => goToStep(3));
+        document.getElementById('back-to-step-2').addEventListener('click', () => goToStep(2));
+        document.getElementById('next-to-step-4').addEventListener('click', () => goToStep(4));
+        document.getElementById('back-to-step-3').addEventListener('click', () => goToStep(3));
+        
+        // Finalizar pedido personalizado
+        document.getElementById('submit-custom-order').addEventListener('click', () => {
+            if (!customOrder.customerName || !customOrder.customerPhone) {
+                alert('Por favor, completa tu nombre y número de teléfono para finalizar el pedido.');
+                return;
+            }
+            
+            sendWhatsAppRequest();
+            
+            // Reiniciar el formulario
+            customOrder = {
+                designFile: null,
+                designDescription: '',
+                color: 'blanco',
+                size: 'M',
+                notes: '',
+                customerName: '',
+                customerPhone: ''
+            };
+            
+            document.getElementById('file-name').textContent = 'No se ha seleccionado ningún archivo';
+            document.getElementById('design-file').value = '';
+            document.getElementById('design-description').value = '';
+            document.getElementById('custom-notes').value = '';
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-phone').value = '';
+            
+            goToStep(1);
+            alert('¡Solicitud enviada! Serás redirigido a WhatsApp para completar tu pedido.');
+        });
+
+        // Función para enviar solicitud por WhatsApp
+        function sendWhatsAppRequest() {
+            const message = `¡Hola C.J.A! Quiero solicitar una camisa personalizada con las siguientes especificaciones:%0A%0A
+📋 *DETALLES DEL DISEÑO*%0A
+• Diseño: ${customOrder.designDescription}%0A
+• Color: ${customOrder.color}%0A
+• Talla: ${customOrder.size}%0A
+• Notas: ${customOrder.notes || 'Ninguna'}%0A%0A
+👤 *DATOS DE CONTACTO*%0A
+• Nombre: ${customOrder.customerName}%0A
+• Teléfono: ${customOrder.customerPhone}`;
+            
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
